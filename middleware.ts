@@ -20,6 +20,6 @@ export const config = {
       Next.jsの公式推奨に近い、標準的なWebアプリ用matcher
       (APIやNext.jsの内部リソース、公開リソースへのアクセスは除外)
     */
-    "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)",
+    "/((?!api|static|_next|.*\\..*).*)",
   ],
 };
