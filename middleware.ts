@@ -15,11 +15,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    /*
-      Next.jsの公式推奨に近い、標準的なWebアプリ用matcher
-      (APIやNext.jsの内部リソース、公開リソースへのアクセスは除外)
-    */
-    "/((?!api|static|_next|.*\\..*).*)",
-  ],
+  matcher: ["/((?!api|static|_next|.*\\..*).*)"],
 };
