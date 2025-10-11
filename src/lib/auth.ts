@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "@/db";
+import { db } from "../../db";
 import { nanoid } from "nanoid";
 import { anonymous } from "better-auth/plugins";
 import { nextCookies } from "better-auth/next-js";

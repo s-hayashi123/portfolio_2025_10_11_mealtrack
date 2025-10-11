@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
+const publicRoots = ["/", "login", "register"];
+
 export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
+  const isPrivateRoutes = !publicRoots.includes(request.nextUrl.pathname);
 
-  // THIS IS NOT SECURE!
-  // This is the recommended approach to optimistically redirect users
-  // We recommend handling auth checks in each page/route
-  if (!sessionCookie) {
+  if (!sessionCookie && isPrivateRoutes) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -15,5 +15,11 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard"], // Specify the routes the middleware applies to
+  matcher: [
+    /*
+      Next.jsの公式推奨に近い、標準的なWebアプリ用matcher
+      (APIやNext.jsの内部リソース、公開リソースへのアクセスは除外)
+    */
+    "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)",
+  ],
 };
