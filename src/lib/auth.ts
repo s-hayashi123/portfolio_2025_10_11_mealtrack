@@ -4,12 +4,13 @@ import { db } from "../../db";
 import { nanoid } from "nanoid";
 import { anonymous } from "better-auth/plugins";
 import { nextCookies } from "better-auth/next-js";
+import * as authSchema from "../../db/schemas/auth";
 
 export const auth = betterAuth({
   baseURL: "http://localhost:3000",
   database: drizzleAdapter(db, {
     provider: "pg",
-    usePlural: true,
+    schema: authSchema,
   }),
   advanced: {
     database: {
