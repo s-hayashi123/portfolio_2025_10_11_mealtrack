@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,11 +9,14 @@ import {
   FieldGroup,
   FieldSeparator,
 } from "@/components/ui/field";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter();
   return (
     <div className={cn("flex flex-col gap-4", className)} {...props}>
       <Card className="overflow-hidden p-0">
@@ -42,7 +47,16 @@ export function SignupForm({
                   </svg>
                   <span className="sr-only">Googleでサインアップ</span>
                 </Button>
-                <Button variant="outline" type="button" className="py-2">
+                <Button
+                  onClick={() =>
+                    authClient.signIn.anonymous().then(() => {
+                      router.push("/dashboard");
+                    })
+                  }
+                  variant="outline"
+                  type="button"
+                  className="py-2"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={24}
