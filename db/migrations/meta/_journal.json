@@ -8,6 +8,13 @@
       "when": 1760165603757,
       "tag": "0000_windy_omega_sentinel",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1760268435737,
+      "tag": "0001_easy_zaladane",
+      "breakpoints": true
     }
   ]
 }
