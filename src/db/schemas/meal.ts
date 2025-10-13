@@ -1,8 +1,6 @@
 import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { user } from "./auth";
 
-export const mealType = ["朝食", "昼食", "夕食", "その他"] as const;
-
 export const mealRecords = pgTable("meal_records", {
   id: text("id").primaryKey(),
   userId: text("user_id")
