@@ -1,4 +1,4 @@
-export default function Home() {
+export default async function Home() {
   return (
     <main className="container">
       <div className="my-4">

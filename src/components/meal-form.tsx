@@ -1,4 +1,4 @@
-import { mealType } from "../../db/schemas/meal";
+import { mealType } from "../db/schemas/meal";
 
 export default function MealForm() {
   type MealFormType = {
