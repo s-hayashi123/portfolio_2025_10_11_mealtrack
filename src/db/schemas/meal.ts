@@ -14,3 +14,6 @@ export const mealRecords = pgTable("meal_records", {
   note: text("note"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export type MealRecord = typeof mealRecords.$inferSelect;
+export type NewMealRecord = typeof mealRecords.$inferInsert;
