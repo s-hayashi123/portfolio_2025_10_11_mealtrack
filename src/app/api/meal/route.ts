@@ -37,36 +37,7 @@ export async function GET() {
   const allMeals = await db
     .select()
     .from(mealRecords)
+    .where(eq(mealRecords.userId, session.user.id))
     .orderBy(mealRecords.createdAt);
   return NextResponse.json(allMeals);
-}
-
-export async function PUT(req: Request) {
-  const session = await verifiSessionForAPI();
-  if (!session)
-    return NextResponse.json(
-      { error: "認証されていません。" },
-      { status: 401 }
-    );
-  const data = await req.json();
-  const { id, foodName, totalKcal } = data;
-  await db
-    .update(mealRecords)
-    .set({ foodName, totalKcal })
-    .where(eq(mealRecords.id, id) && eq(mealRecords.userId, session.user.id));
-  return NextResponse.json({ success: true });
-}
-
-export async function DELETE(req: Request) {
-  const session = await verifiSessionForAPI();
-  if (!session)
-    return NextResponse.json(
-      { error: "認証されていません。" },
-      { status: 401 }
-    );
-  const { id } = await req.json();
-  await db
-    .delete(mealRecords)
-    .where(eq(mealRecords.id, id) && eq(mealRecords.userId, session.user.id));
-  return NextResponse.json({ success: true });
 }

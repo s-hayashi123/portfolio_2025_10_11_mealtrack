@@ -32,11 +32,18 @@ export default function Dashboard() {
     getMeals();
   };
 
+  const deleteMeal = async (id: string) => {
+    await fetch(`/api/meal/${id}`, {
+      method: "DELETE",
+    });
+    getMeals();
+  };
+
   return (
     <div className="container my-4">
       <h1 className="text-center font-bold text-3xl">ダッシュボード</h1>
       <h2 className="font-bold text-2xl">食事管理</h2>
-      <div className="flex space-x-3 my-4">
+      <div className="flex space-x-3 my-4 max-w-md mx-auto">
         <Input
           placeholder="食事名"
           name="foodName"
@@ -54,8 +61,12 @@ export default function Dashboard() {
 
       <ul>
         {meals.map((meal) => (
-          <li key={meal.id}>
+          <li
+            key={meal.id}
+            className="flex justify-between mb-3 max-w-md mx-auto"
+          >
             {meal.foodName} - {meal.totalKcal}
+            <Button onClick={() => deleteMeal(meal.id)}>削除</Button>
           </li>
         ))}
       </ul>
