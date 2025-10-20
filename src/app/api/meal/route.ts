@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { mealRecords } from "@/db/schemas/meal";
 import { verifiSessionForAPI } from "@/lib/session";
+import { mealFormSchema } from "@/zod/meal";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
@@ -15,13 +16,21 @@ export async function POST(req: Request) {
     );
 
   const data = await req.json();
-  const { foodName, totalKcal, note } = data;
+  const parseResult = mealFormSchema.safeParse(data);
+
+  if (!parseResult.success) {
+    return NextResponse.json(
+      { error: "入力値が正しくありません。", issues: parseResult.error.issues },
+      { status: 400 }
+    );
+  }
+
+  const { foodName, totalKcal } = parseResult.data;
 
   await db.insert(mealRecords).values({
     userId: session.user.id,
     foodName,
     totalKcal,
-    note,
   });
   return NextResponse.json({ success: true });
 }

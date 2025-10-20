@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { mealRecords } from "@/db/schemas/meal";
 import { verifiSessionForAPI } from "@/lib/session";
+import { mealFormSchema } from "@/zod/meal";
 import { and, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
@@ -42,11 +43,18 @@ export async function PUT(
       { error: "認証されていません。" },
       { status: 401 }
     );
-  const data = await req.json();
+  const rawData = await req.json();
+  const parseResult = mealFormSchema.safeParse(rawData);
+  if (!parseResult.success) {
+    return NextResponse.json(
+      { error: "入力値が不正です。", details: parseResult.error },
+      { status: 400 }
+    );
+  }
   const { id } = await params;
   await db
     .update(mealRecords)
-    .set(data)
+    .set(parseResult.data)
     .where(
       and(eq(mealRecords.id, id), eq(mealRecords.userId, session.user.id))
     );
