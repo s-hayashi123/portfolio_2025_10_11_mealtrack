@@ -25,12 +25,30 @@ export async function POST(req: Request) {
     );
   }
 
-  const { foodName, totalKcal } = parseResult.data;
+  const {
+    foodName,
+    totalKcal,
+    totalProtein,
+    totalFat,
+    totalCarbs,
+    mealType,
+    unit,
+    amount,
+    note,
+  } = parseResult.data;
 
   await db.insert(mealRecords).values({
     userId: session.user.id,
     foodName,
     totalKcal,
+    totalProtein,
+    totalFat,
+    totalCarbs,
+    mealType,
+    unit,
+    amount,
+    note,
+    recordedAt: new Date(),
   });
   return NextResponse.json({ success: true });
 }
