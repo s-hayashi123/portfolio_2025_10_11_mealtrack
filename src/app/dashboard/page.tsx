@@ -72,6 +72,48 @@ export default function Dashboard() {
         />
         <Input
           type="number"
+          placeholder="タンパク質"
+          name="protein"
+          value={totalKcal}
+          onChange={(e) => setTotalKcal(e.target.value)}
+        />
+        <Input
+          type="number"
+          placeholder="脂質"
+          name="fat"
+          value={totalKcal}
+          onChange={(e) => setTotalKcal(e.target.value)}
+        />
+        <Input
+          type="number"
+          placeholder="炭水化物"
+          name="cabs"
+          value={totalKcal}
+          onChange={(e) => setTotalKcal(e.target.value)}
+        />
+        <Input
+          type="number"
+          placeholder="単位"
+          name="cabs"
+          value={totalKcal}
+          onChange={(e) => setTotalKcal(e.target.value)}
+        />
+        <Input
+          type="number"
+          placeholder="量"
+          name="cabs"
+          value={totalKcal}
+          onChange={(e) => setTotalKcal(e.target.value)}
+        />
+        <Input
+          type="number"
+          placeholder="炭水化物"
+          name="cabs"
+          value={totalKcal}
+          onChange={(e) => setTotalKcal(e.target.value)}
+        />
+        <Input
+          type="number"
           placeholder="カロリー数"
           name="kcal"
           value={totalKcal}
