@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { MealRecord } from "@/db/schemas/meal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import MealForm from "@/components/meal-form";
 
 export default function Dashboard() {
   const [meals, setMeals] = useState<MealRecord[]>([]);
@@ -19,19 +20,6 @@ export default function Dashboard() {
   useEffect(() => {
     getMeals();
   }, []);
-
-  const addMeals = async () => {
-    await fetch("/api/meal", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ foodName, totalKcal: Number(totalKcal) }),
-    });
-    setFoodName("");
-    setTotalKcal("");
-    getMeals();
-  };
 
   const deleteMeal = async (id: string) => {
     await fetch(`/api/meal/${id}`, {
@@ -63,64 +51,7 @@ export default function Dashboard() {
       <h1 className="font-bold text-3xl">ダッシュボード</h1>
       <h2 className="font-bold text-2xl text-center">食事管理</h2>
 
-      <div className="flex space-x-3 mt-4 mb-8 mx-auto">
-        <Input
-          placeholder="食事名"
-          name="foodName"
-          value={foodName}
-          onChange={(e) => setFoodName(e.target.value)}
-        />
-        <Input
-          type="number"
-          placeholder="タンパク質"
-          name="protein"
-          value={totalKcal}
-          onChange={(e) => setTotalKcal(e.target.value)}
-        />
-        <Input
-          type="number"
-          placeholder="脂質"
-          name="fat"
-          value={totalKcal}
-          onChange={(e) => setTotalKcal(e.target.value)}
-        />
-        <Input
-          type="number"
-          placeholder="炭水化物"
-          name="cabs"
-          value={totalKcal}
-          onChange={(e) => setTotalKcal(e.target.value)}
-        />
-        <Input
-          type="number"
-          placeholder="単位"
-          name="cabs"
-          value={totalKcal}
-          onChange={(e) => setTotalKcal(e.target.value)}
-        />
-        <Input
-          type="number"
-          placeholder="量"
-          name="cabs"
-          value={totalKcal}
-          onChange={(e) => setTotalKcal(e.target.value)}
-        />
-        <Input
-          type="number"
-          placeholder="炭水化物"
-          name="cabs"
-          value={totalKcal}
-          onChange={(e) => setTotalKcal(e.target.value)}
-        />
-        <Input
-          type="number"
-          placeholder="カロリー数"
-          name="kcal"
-          value={totalKcal}
-          onChange={(e) => setTotalKcal(e.target.value)}
-        />
-        <Button onClick={addMeals}>追加</Button>
-      </div>
+      <MealForm />
 
       <ul>
         {meals.map((meal) => {
