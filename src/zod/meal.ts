@@ -24,3 +24,5 @@ export const mealFormSchema = createInsertSchema(mealRecords, {
   createdAt: true,
   userId: true,
 });
+
+export type MealFormSchema = z.infer<typeof mealFormSchema>;

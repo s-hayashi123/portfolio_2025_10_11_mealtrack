@@ -1,5 +1,6 @@
+import { MealType } from "@/app/types/meal";
 import { db } from "@/db";
-import { mealRecords } from "@/db/schemas/meal";
+import { MealRecord, mealRecords } from "@/db/schemas/meal";
 import { verifiSessionForAPI } from "@/lib/session";
 import { mealFormSchema } from "@/zod/meal";
 import { eq } from "drizzle-orm";
@@ -24,30 +25,9 @@ export async function POST(req: Request) {
       { status: 400 }
     );
   }
-
-  const {
-    foodName,
-    totalKcal,
-    totalProtein,
-    totalFat,
-    totalCarbs,
-    mealType,
-    unit,
-    amount,
-    note,
-  } = parseResult.data;
-
   await db.insert(mealRecords).values({
     userId: session.user.id,
-    foodName,
-    totalKcal,
-    totalProtein,
-    totalFat,
-    totalCarbs,
-    mealType,
-    unit,
-    amount,
-    note,
+    ...parseResult.data,
     recordedAt: new Date(),
   });
   return NextResponse.json({ success: true });
@@ -61,7 +41,7 @@ export async function GET() {
       { status: 401 }
     );
 
-  const allMeals = await db
+  const allMeals: MealRecord[] = await db
     .select()
     .from(mealRecords)
     .where(eq(mealRecords.userId, session.user.id))
