@@ -4,6 +4,14 @@ import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import { Form } from "./ui/form";
 import { Input } from "./ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { Label } from "./ui/label";
 
 export default function MealForm() {
   const mealForm = useForm<MealFormSchema>({
@@ -12,13 +20,7 @@ export default function MealForm() {
       foodName: "",
       totalKcal: 0,
       mealType: "breakfast",
-      amount: 1,
-      unit: "g",
-      totalProtein: 0,
-      totalFat: 0,
-      totalCarbs: 0,
-      recordedAt: new Date(),
-      note: "",
+      recordedAt: new Date().toISOString().split("T")[0], // YYYY-MM-DD形式
     },
     mode: "onBlur",
   });
@@ -27,6 +29,8 @@ export default function MealForm() {
     handleSubmit,
     register,
     reset,
+    setValue,
+    watch,
     formState: { errors, isSubmitting },
   } = mealForm;
 
@@ -44,29 +48,72 @@ export default function MealForm() {
       console.error("送信エラー", err);
     }
   };
+
   return (
     <Form {...mealForm}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-cols gap-4 my-8"
+        className="space-y-4 my-8 max-w-md mx-auto"
       >
-        <Input
-          {...register("foodName")}
-          placeholder="食事名"
-          aria-invalid={errors.foodName ? "true" : "false"}
-        />
-        {errors.foodName && (
-          <p className="text-red-600 text-sm">{errors.foodName.message}</p>
-        )}
-        <Input
-          {...register("totalKcal")}
-          placeholder="kcal"
-          aria-invalid={errors.totalKcal ? "true" : "false"}
-        />
-        {errors.totalKcal && (
-          <p className="text-red-600 text-sm">{errors.totalKcal.message}</p>
-        )}
-        <Button type="submit" disabled={isSubmitting}>
+        <div className="space-y-2">
+          <Label htmlFor="foodName">食事名</Label>
+          <Input
+            {...register("foodName")}
+            placeholder="例: ハンバーガー"
+            aria-invalid={errors.foodName ? "true" : "false"}
+          />
+          {errors.foodName && (
+            <p className="text-red-600 text-sm">{errors.foodName.message}</p>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="totalKcal">カロリー (kcal)</Label>
+          <Input
+            {...register("totalKcal", { valueAsNumber: true })}
+            type="number"
+            placeholder="例: 500"
+            aria-invalid={errors.totalKcal ? "true" : "false"}
+          />
+          {errors.totalKcal && (
+            <p className="text-red-600 text-sm">{errors.totalKcal.message}</p>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="mealType">食事タイプ</Label>
+          <Select
+            value={watch("mealType")}
+            onValueChange={(value) => setValue("mealType", value as any)}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="食事タイプを選択" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="breakfast">朝食</SelectItem>
+              <SelectItem value="lunch">昼食</SelectItem>
+              <SelectItem value="dinner">夕食</SelectItem>
+              <SelectItem value="snack">間食</SelectItem>
+            </SelectContent>
+          </Select>
+          {errors.mealType && (
+            <p className="text-red-600 text-sm">{errors.mealType.message}</p>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="recordedAt">食べた日付</Label>
+          <Input
+            {...register("recordedAt")}
+            type="date"
+            aria-invalid={errors.recordedAt ? "true" : "false"}
+          />
+          {errors.recordedAt && (
+            <p className="text-red-600 text-sm">{errors.recordedAt.message}</p>
+          )}
+        </div>
+
+        <Button type="submit" disabled={isSubmitting} className="w-full">
           {isSubmitting ? "保存中..." : "保存"}
         </Button>
       </form>

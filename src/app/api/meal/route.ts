@@ -28,7 +28,7 @@ export async function POST(req: Request) {
   await db.insert(mealRecords).values({
     userId: session.user.id,
     ...parseResult.data,
-    recordedAt: new Date(),
+    recordedAt: new Date(parseResult.data.recordedAt),
   });
   return NextResponse.json({ success: true });
 }
