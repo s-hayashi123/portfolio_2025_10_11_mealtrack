@@ -43,6 +43,13 @@
       "when": 1761084332964,
       "tag": "0005_daily_fat_cobra",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1761780779562,
+      "tag": "0006_goofy_jack_power",
+      "breakpoints": true
     }
   ]
 }
