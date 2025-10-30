@@ -28,6 +28,7 @@ export default function MealList() {
     await fetch(`/api/meal/${id}`, {
       method: "DELETE",
     });
+    await fetchMeal();
   };
 
   const updateMeal = async (
@@ -39,7 +40,7 @@ export default function MealList() {
       method: "PUT",
       body: JSON.stringify({ foodName, totalKcal }),
     });
-    fetchMeal();
+    await fetchMeal();
   };
 
   const handleEdit = (meal: MealRecord) => {
