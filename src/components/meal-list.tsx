@@ -61,17 +61,21 @@ export default function MealList() {
     setEditId(null);
   };
   return (
-    <ul>
+    <ul className="space-y-3">
       {meals.map((meal) => (
-        <li key={meal.id} className="flex justify-between">
+        <li
+          key={meal.id}
+          className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
+        >
           {editId === meal.id ? (
-            <div className="flex w-full gap-4">
+            <div className="flex w-full items-center gap-3">
               <Input
                 value={editData.foodName}
                 placeholder="食事名"
                 onChange={(e) =>
                   setEditData((prev) => ({ ...prev, foodName: e.target.value }))
                 }
+                className="flex-1"
               />
               <Input
                 value={editData.totalKcal}
@@ -82,24 +86,38 @@ export default function MealList() {
                     totalKcal: e.target.value,
                   }))
                 }
+                className="w-24"
               />
-              <Button onClick={handleCancel}>キャンセル</Button>
+              <Button onClick={handleCancel} variant="outline">
+                キャンセル
+              </Button>
               <Button onClick={() => handleSave(meal.id)}>保存</Button>
             </div>
           ) : (
             <>
-              <span>
-                {meal.foodName} - {meal.totalKcal}
-              </span>
+              <div className="flex-1">
+                <p className="font-medium text-gray-900">{meal.foodName}</p>
+                <div className="mt-1 flex items-center gap-3 text-sm text-gray-600">
+                  <span>{meal.totalKcal}kcal</span>
+                  <span>/</span>
+                  <span>{meal.mealType}</span>
+                  <span>/</span>
+                  <span>
+                    {new Date(meal.recordedAt).toLocaleDateString("ja-JP")}
+                  </span>
+                </div>
+              </div>
               <div className="flex gap-2">
                 <Button
-                  className="bg-gray-700"
+                  variant="outline"
+                  size="sm"
                   onClick={() => handleEdit(meal)}
                 >
                   編集
                 </Button>
                 <Button
-                  className="bg-red-600"
+                  variant="destructive"
+                  size="sm"
                   onClick={() => deleteMeal(meal.id)}
                 >
                   削除

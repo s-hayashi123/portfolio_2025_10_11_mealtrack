@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { LogoutButton } from "./logout-button";
 
 export async function Header() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -23,9 +24,7 @@ export async function Header() {
               <Button variant="outline" asChild className="ml-2">
                 <Link href="/profile">プロフィール</Link>
               </Button>
-              <Button variant="outline" asChild className="ml-2">
-                <Link href="/logout">ログアウト</Link>
-              </Button>
+              <LogoutButton />
             </>
           ) : (
             <>
