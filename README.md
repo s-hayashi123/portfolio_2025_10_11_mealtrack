@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MealTrack - 食事記録・体重管理アプリ
 
-## Getting Started
+MealTrack は、日々の食事記録と体重管理をサポートするヘルスケアアプリケーションです。
+ユーザーが食事を記録し、栄養バランスや体重の変化を追跡できるモダンな Web アプリケーションとして開発しています。
 
-First, run the development server:
+## 📋 プロジェクト概要
+
+- **目的**: 健康的な食生活をサポートするための食事記録・体重管理アプリ
+- **開発開始日**: 2025 年 10 月 11 日
+- **ステータス**: 開発中
+
+## 🛠️ 技術スタック
+
+### フロントエンド
+
+- **Framework**: Next.js 15 (App Router)
+- **UI Library**: React 19
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI
+
+### バックエンド
+
+- **Authentication**: Better Auth
+- **Database**: PostgreSQL (Supabase)
+- **ORM**: Drizzle ORM
+- **Validation**: Zod
+
+### インフラ・デプロイ
+
+- **Hosting**: Vercel
+- **Database**: Supabase
+
+### 開発ツール
+
+- **Linting**: ESLint
+- **Type Checking**: TypeScript (strict mode)
+- **Version Control**: Git (Conventional Commits)
+
+## 🚀 セットアップ
+
+### 必要な環境
+
+- Node.js 18.0.0 以上
+- npm / yarn / pnpm / bun
+
+### インストール手順
 
 ```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# ビルド
+npm run build
+
+# 本番環境の起動
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+開発サーバーは [http://localhost:3000](http://localhost:3000) で起動します。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📚 ドキュメント
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [実装計画](./docs/IMPLEMENTATION_PLAN.md)
+- [第 1 段階詳細ガイド](./docs/PHASE_1_DETAIL.md)
 
-## Learn More
+## 📅 開発ログ
 
-To learn more about Next.js, take a look at the following resources:
+### 2025 年 10 月 11 日
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **実装内容**: プロジェクト初期セットアップ
+  - Next.js 15 + React 19 プロジェクト作成
+  - Better Auth による認証システム構築
+  - Supabase + Drizzle ORM によるデータベースセットアップ
+  - 基本的な食事記録 CRUD 機能の実装
+- **学んだこと**:
+  - Next.js 15 の App Router の新機能を理解
+  - Better Auth による認証フローの構築方法を習得
+  - Drizzle ORM のマイグレーション管理方法を学習
+- **技術的な課題・解決策**:
+  - _ここに直面した課題とその解決方法を記録_
+- **次回の予定**:
+  - _次回開発予定の機能や改善点を記載_
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🎯 今後の開発予定
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **基本機能の拡張** (第 1 段階)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   - 食事タイプ分類（朝食・昼食・夕食・間食）
+   - 栄養素詳細記録（タンパク質・脂質・炭水化物）
+   - UI/UX 改善
+
+2. **体重管理機能** (第 2 段階)
+
+   - 体重記録・履歴表示
+   - 体重推移グラフ
+   - 目標体重設定
+
+3. **分析・レポート機能** (第 3 段階)
+   - カロリー分析（日別・週別・月別）
+   - 栄養バランス分析
+   - データ可視化
+
+詳細は [実装計画](./docs/IMPLEMENTATION_PLAN.md) を参照してください。
+
+## 📊 開発状況
+
+- [ ] 第 1 段階: 基本機能の拡張
+- [ ] 第 2 段階: 体重管理機能
+- [ ] 第 3 段階: 分析・レポート機能
+- [ ] 第 4 段階: 高度な機能
+- [ ] 第 5 段階: ソーシャル・共有機能
+- [ ] 第 6 段階: AI・自動化機能
+
+## 📝 開発ログの記録方法
+
+開発ログは以下のフォーマットで記録しています：
+
+```markdown
+### YYYY 年 MM 月 DD 日
+
+- **実装内容**: [実施した機能や変更内容]
+- **学んだこと**: [新しい知識やスキル]
+- **技術的な課題・解決策**: [直面した問題とその解決方法]
+- **次回の予定**: [次回の開発予定]
+```
+
+### 記録のポイント
+
+- **実装内容**: 具体的な機能や変更点を記載
+- **学んだこと**: 技術的な学び、ベストプラクティス、新しいツールの使用感など
+- **技術的な課題・解決策**: 問題解決能力をアピールできる部分。エラーメッセージ、調査方法、解決までのプロセスを記録
+- **数値や成果**: 可能であればパフォーマンス改善、コード削減量などの数値を記載
+- **参考資料**: 参考にしたドキュメントや記事があればリンクを記載
+
+## 📸 スクリーンショット
+
+_デモ画面のスクリーンショットをここに追加予定_
+
+## 🔗 リンク
+
+- **デモサイト**: _デプロイ後の URL を追加_
+- **GitHub**: _リポジトリ URL_
+
+---
+
+**開発者**: [あなたの名前]  
+**連絡先**: [メールアドレスや SNS]
