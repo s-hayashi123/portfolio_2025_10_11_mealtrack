@@ -15,15 +15,15 @@ export async function Header() {
             <span className="">MealTrack</span>
           </span>
         </Link>
-        <nav className="flex items-center space-x-2">
+        <nav className="flex items-center space-x-4">
           {session ? (
             <>
-              <Button variant="outline" asChild>
-                <Link href="/dashboard">ダッシュボード</Link>
-              </Button>
-              <Button variant="outline" asChild className="ml-2">
-                <Link href="/profile">プロフィール</Link>
-              </Button>
+              <Link href="/dashboard" className="text-white font-semibold">
+                ダッシュボード
+              </Link>
+              <Link href="/profile" className="text-white font-semibold">
+                プロフィール
+              </Link>
               <LogoutButton />
             </>
           ) : (
