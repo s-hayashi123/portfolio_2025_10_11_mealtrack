@@ -22,7 +22,7 @@ export async function GET() {
     .from(mealRecords)
     .where(
       and(
-        eq(mealRecords.userId, session?.user.id),
+        eq(mealRecords.userId, session.user.id),
         gte(mealRecords.recordedAt, today),
         lt(mealRecords.recordedAt, tomorrow)
       )
