@@ -24,6 +24,7 @@ export const profile = pgTable("profile", {
   carbRatio: real("carb_ratio").notNull(),
 
   targetCalories: integer("target_calories").notNull(),
+  calorieGoal: integer("calorie_goal"),
 
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")

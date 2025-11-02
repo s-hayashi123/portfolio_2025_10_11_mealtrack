@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { profile } from "@/db/schemas/profile";
 import { verifiSessionForAPI } from "@/lib/session";
 import { eq } from "drizzle-orm";
+import { nanoid } from "nanoid";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -33,7 +34,6 @@ export async function POST(req: Request) {
       { status: 401 }
     );
   const data = await req.json();
-
   const {
     height,
     weight,
@@ -45,6 +45,7 @@ export async function POST(req: Request) {
     proteinRatio,
     fatRatio,
     carbRatio,
+    calorieGoal,
   } = data;
 
   let bmr: number;
@@ -56,8 +57,8 @@ export async function POST(req: Request) {
 
   const tdee = bmr * activityLevel;
 
-  const weightDiff = targetWeight - weight; // kg
-  const totalCaloriesDiff = weightDiff * 7700; // 1kg = 7700kcal
+  const weightDiff = targetWeight - weight;
+  const totalCaloriesDiff = weightDiff * 7700;
   const dailyCaloriesDiff = totalCaloriesDiff / targetPeriodDays;
 
   const targetCalories = Math.round(tdee + dailyCaloriesDiff);
@@ -69,4 +70,25 @@ export async function POST(req: Request) {
       { status: 400 }
     );
   }
+
+  const existingGoal = await db
+    .select()
+    .from(profile)
+    .where(eq(profile.userId, session.user.id))
+    .limit(1);
+
+  if (existingGoal.length > 0) {
+    await db
+      .update(profile)
+      .set({ ...calorieGoal })
+      .where(eq(profile.userId, session.user.id));
+  } else {
+    await db.insert(profile).values({
+      id: nanoid(10),
+      userId: session.user.id,
+      ...data,
+    });
+  }
+
+  return NextResponse.json({ success: true, targetCalories });
 }
