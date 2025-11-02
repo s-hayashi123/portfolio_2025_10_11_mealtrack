@@ -15,13 +15,9 @@ export async function GET() {
     );
 
   const timeZone = "Asia/Tokyo";
-
   const now = new Date();
-
   const nowJST = toZonedTime(now, timeZone);
-
   const startOfTodayJST = startOfDay(nowJST);
-
   const startOfTomorrowJST = addDays(startOfTodayJST, 1);
 
   const startOfTodayUST = fromZonedTime(startOfTodayJST, timeZone);

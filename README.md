@@ -97,6 +97,20 @@ npm start
 
 ---
 
+### 2025 年 11 月 2 日
+
+- **実装内容**: `/api/meal/today` エンドポイントのタイムゾーン対応を実装
+  - `date-fns-tz` を使用して日本時間（JST）での日付計算に修正
+  - データベース比較は UTC、表示は日本時間で処理するように変更
+- **学んだこと**:
+  - `date-fns-tz` の`fromZonedTime`（タイムゾーン → UTC）、`toZonedTime`（UTC → タイムゾーン）今回なら Asia/Tokyo
+  - supabase 側の timezone を Asia/Tokyo に変更（参考：https://qiita.com/7mpy/items/bedd102355a51e93a7df）
+- ## **技術的な課題・解決策**:
+- ## **次回の予定**:
+  -
+
+---
+
 ## 📸 スクリーンショット
 
 [![現状のダッシュボード](public/images/dashboard2025-11-01.png)]

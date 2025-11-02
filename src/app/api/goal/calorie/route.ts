@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { profile } from "@/db/schemas/goal";
+import { profile } from "@/db/schemas/profile";
 import { verifiSessionForAPI } from "@/lib/session";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
