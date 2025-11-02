@@ -40,7 +40,7 @@ export async function GET() {
 
   const totalCalories = todayMeals[0]?.totalKcal || 0;
 
-  const dateString = format(startOfTodayJST, "yyyy-mm-dd");
+  const dateString = format(startOfTodayJST, "yyyy-MM-dd");
 
   return NextResponse.json({
     totalCalories: Number(totalCalories) || 0,
