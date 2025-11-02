@@ -57,6 +57,13 @@
       "when": 1761986938655,
       "tag": "0008_amazing_hydra",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1762080391512,
+      "tag": "0008_loving_otto_octavius",
+      "breakpoints": true
     }
   ]
 }

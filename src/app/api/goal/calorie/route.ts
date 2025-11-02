@@ -20,10 +20,10 @@ export async function GET() {
     .limit(1);
 
   if (goal.length === 0) {
-    return NextResponse.json({ goal: null });
+    return NextResponse.json(null);
   }
 
-  return NextResponse.json({ goal: goal[0] });
+  return NextResponse.json(goal[0]);
 }
 
 export async function POST(req: Request) {
@@ -86,6 +86,7 @@ export async function POST(req: Request) {
     await db.insert(profile).values({
       id: nanoid(10),
       userId: session.user.id,
+      calorieGoal,
       ...data,
     });
   }
